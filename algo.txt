@@ -135,6 +135,45 @@ def miller_rabin(n, k=5):
 
     return True  # n is probably prime
 
+
+
+
+# Public Class
+class PublicClass:
+    def __init__(self, name):
+        self.name = name  # Public attribute
+
+    def greet(self):
+        return f"Hello, {self.name}!"  # Public method
+
+# Private Class
+class _PrivateClass:
+    def __init__(self, secret):
+        self.__secret = secret  # Private attribute (name mangling)
+
+    def __reveal_secret(self):
+        return f"The secret is: {self.__secret}"  # Private method (name mangling)
+
+    # Public method to access the private method
+    def reveal_secret(self):
+        return self.__reveal_secret()
+
+# Example usage
+
+# PublicClass
+public_instance = PublicClass("Alice")
+print(public_instance.greet())  # Output: Hello, Alice!
+print(public_instance.name)  # Accessing public attribute directly
+
+# PrivateClass
+private_instance = _PrivateClass("Hidden treasure")
+# print(private_instance.__secret)  # Will raise an AttributeError (private attribute)
+print(private_instance.reveal_secret())  # Output: The secret is: Hidden treasure
+
+# The following would result in an error because of name mangling:
+# print(private_instance.__reveal_secret())  # Will raise an AttributeError
+
+
 # Example usage
 n = 31
 print(f"{n} is prime: {miller_rabin(n)}")
